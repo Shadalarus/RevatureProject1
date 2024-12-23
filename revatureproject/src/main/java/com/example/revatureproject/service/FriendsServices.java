@@ -69,4 +69,16 @@ public class FriendsServices {
     public List<Friends> getFriendsBySentByAndAccepted(int FriendId, int accepted){
         return friendsRepository.findBySentByAndAccepted(FriendId, accepted);
     }
+
+    public Friends acceptFriend(int FriendId){
+        Optional<Friends> optionalFriend = friendsRepository.findById(FriendId);
+        if (optionalFriend.isPresent()){
+            Friends newFriend = optionalFriend.get();
+            newFriend.setAccepted(1);
+            return friendsRepository.save(newFriend);
+        }
+        else{
+            return null;
+        }
+    }
 }

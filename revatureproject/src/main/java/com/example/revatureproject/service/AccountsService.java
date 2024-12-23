@@ -19,7 +19,7 @@ public class AccountsService {
     }
 
     public Accounts addAccount(Accounts account){
-        if(account.getAccountPassword().length() < 4 || account.getUsername() == "" || accountsRepository.findByUsername(account.getUsername()) != null || account.getFirstName() == "" || account.getLastName() == ""){
+        if(account.getAccountPassword().length() < 4 || account.getUsername() == "" || findAccountByUsername(account) != null || account.getFirstName() == "" || account.getLastName() == ""){
             return null;
         }
         return accountsRepository.save(account);

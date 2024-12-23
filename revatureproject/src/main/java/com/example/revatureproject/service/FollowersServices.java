@@ -22,9 +22,7 @@ public class FollowersServices {
     }
 
     public Followers addFollow(Followers followers){
-        if(followers.getFollowedId() == null || followers.getFollowerId() == null){
-            return null;
-        }
+        
         return followersRepository.save(followers);
     }
 

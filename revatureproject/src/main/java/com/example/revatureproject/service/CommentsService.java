@@ -67,11 +67,11 @@ public class CommentsService {
         }
     }
 
-    public Comments updateCommentLikes(int CommentId, Comments comment){
+    public Comments updateCommentLikes(int CommentId, int likes){
         Optional<Comments> optionalComment = commentsRepository.findById(CommentId);
         if (optionalComment.isPresent()){
             Comments newComment = optionalComment.get();
-            newComment.setCommentLikes(comment.getCommentLikes());
+            newComment.setCommentLikes(likes);
             return commentsRepository.save(newComment);
         }
         else{

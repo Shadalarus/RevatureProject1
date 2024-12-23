@@ -207,6 +207,17 @@ public class ProjectController {
         }
     }
 
+    @PatchMapping(value = "/friends/{friendId}")
+    @CrossOrigin
+    public ResponseEntity<Integer> acceptFriend(@PathVariable int friendId){
+        if(friendsServices.acceptFriend(friendId) != null){
+            return ResponseEntity.status(200).body(1);
+        }
+        else{
+            return ResponseEntity.status(400).body(null);
+        }
+    }
+
     @GetMapping(value = "/comments/{CommentId}")
     @CrossOrigin
     public ResponseEntity<Comments> getCommentById(@PathVariable int CommentId){
@@ -252,6 +263,50 @@ public class ProjectController {
     @CrossOrigin
     public ResponseEntity<Integer> updateEmail(@PathVariable int accountId, @PathVariable String email){
         if(accountsService.updateEmail(accountId, email) != null){
+            return ResponseEntity.status(200).body(1);
+        }
+        else{
+            return ResponseEntity.status(400).body(null);
+        }
+    }
+
+    @PatchMapping(value = "/updatePhone/{accountId}/{phone}")
+    @CrossOrigin
+    public ResponseEntity<Integer> updatePhone(@PathVariable int accountId, @PathVariable String phone){
+        if(accountsService.updatePhoneNumber(accountId, phone) != null){
+            return ResponseEntity.status(200).body(1);
+        }
+        else{
+            return ResponseEntity.status(400).body(null);
+        }
+    }
+
+    @PatchMapping(value = "/updatePass/{accountId}/{pass}")
+    @CrossOrigin
+    public ResponseEntity<Integer> updatePass(@PathVariable int accountId, @PathVariable String pass){
+        if(accountsService.updatePassword(accountId, pass) != null){
+            return ResponseEntity.status(200).body(1);
+        }
+        else{
+            return ResponseEntity.status(400).body(null);
+        }
+    }
+
+    @PatchMapping(value = "/updatePostLikes/{postId}/{likes}")
+    @CrossOrigin
+    public ResponseEntity<Integer> updatePostLikes(@PathVariable int postId, @PathVariable int likes){
+        if(postsService.updatePostLikes(postId, likes) != null){
+            return ResponseEntity.status(200).body(1);
+        }
+        else{
+            return ResponseEntity.status(400).body(null);
+        }
+    }
+
+    @PatchMapping(value = "/updateCommentLikes/{commentId}/{likes}")
+    @CrossOrigin
+    public ResponseEntity<Integer> updateCommentLikes(@PathVariable int commentId, @PathVariable int likes){
+        if(commentsService.updateCommentLikes(commentId, likes) != null){
             return ResponseEntity.status(200).body(1);
         }
         else{

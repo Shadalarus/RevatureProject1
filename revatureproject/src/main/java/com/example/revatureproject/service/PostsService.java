@@ -3,6 +3,8 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import com.example.revatureproject.entity.Accounts;
 import com.example.revatureproject.entity.Posts;
 import com.example.revatureproject.repository.AccountsRepository;
 import com.example.revatureproject.repository.PostsRepository;
@@ -82,4 +84,15 @@ public class PostsService {
         return postsRepository.findByAccountId(AccountId);
     }
 
+    public Posts updatePostLikes(int postId, int likes){
+        Optional<Posts> optionalPost = postsRepository.findById(postId);
+        if (optionalPost.isPresent()){
+            Posts newPost = optionalPost.get();
+            newPost.setPostLikes(likes);
+            return postsRepository.save(newPost);
+        }
+        else{
+            return null;
+        }
+    }
 }
