@@ -4,6 +4,7 @@ import DisplayAccounts from "./DisplayAccounts";
 const AccountList = () => {
     
     const [users,setUsers]=useState([])
+    const [text,setText]=useState("")
 
     useEffect(()=>{
         axios.get("http://localhost:8080/users")
@@ -15,7 +16,8 @@ const AccountList = () => {
     return(
         <>
         <h1>Current Users</h1>
-        <div><DisplayAccounts users={users}/></div>
+        <input type="text" value={text} placeholder="" onChange={(e)=>setText(e.target.value)}/>
+        <div><DisplayAccounts users={users} userFilter={text}/></div>
         </>
     )
 }

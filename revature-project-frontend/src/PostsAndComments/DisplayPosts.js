@@ -5,40 +5,43 @@ import GetComments from "./GetComments";
 import { Link } from "react-router-dom";
 import DeletePost from "./DeletePost";
 import GetAuthor from "./GetAuthor";
-const DisplayPosts = ({posts}) => {
+import PostLikes from "../Likes/PostLikes";
+
+const DisplayPosts = ({posts, postFilter}) => {
     
     const [context, setContext] = useContext(UserContext)
+    
     if(context == 0){
         return(
-            posts.map((post)=>(
-                <div key={post.postId}>
+            posts.filter(post => post.messageText.includes(postFilter)).map(filteredPosts =>(
+                <div key={filteredPosts.postId}>
                     <hr/>
                     <hr/>
-                    <h4>Post {post.postId}</h4>
-                    <p>{post.messageText}</p>
-                    <p>Likes: {post.postLikes}</p>
-                    <GetAuthor id={post.accountId}/>
+                    <h4>Post {filteredPosts.postId}</h4>
+                    <p>{filteredPosts.messageText}</p>
+                    <p>Likes: {filteredPosts.postLikes}</p>
+                    <GetAuthor id={filteredPosts.accountId}/>
                     <h5>Comments:</h5>
-                    <GetComments id={post.postId}/>
+                    <GetComments id={filteredPosts.postId}/>
                 </div>
             ))
         )
     }
     else{
         return(
-            posts.map((post)=>(
-                <div key={post.postId}>
+            posts.filter(post => post.messageText.includes(postFilter)).map(filteredPosts =>(
+                <div key={filteredPosts.postId}>
                     <hr/>
                     <hr/>
-                    <h4>Post {post.postId}</h4>
-                    <p>{post.messageText}</p>
-                    <p>Likes: {post.postLikes}</p>
-                    <GetAuthor id={post.accountId}/>
-                    <button>Like</button>
+                    <h4>Post {filteredPosts.postId}</h4>
+                    <p>{filteredPosts.messageText}</p>
+                    <p>Likes: {filteredPosts.postLikes}</p>
+                    <PostLikes post={filteredPosts}/>
                     <Link to="/comment"><button>Comment</button></Link>
-                    <DeletePost postId={post.postId} madeBy={post.accountId} user={context.accountId}/>
+                    <DeletePost postId={filteredPosts.postId} madeBy={filteredPosts.accountId} user={context.accountId}/>
+                    <GetAuthor id={filteredPosts.accountId}/>
                     <h5>Comments:</h5>
-                    <GetComments id={post.postId}/>
+                    <GetComments id={filteredPosts.postId}/>
                 </div>
             ))
         )

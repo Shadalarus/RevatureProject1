@@ -12,14 +12,56 @@ const AccountUpdate = ({updateType}) => {
     const [password, setPassword]=useState('');
     const [confPass, setConfPass]=useState('');
 
-    const handleSubmit = (e) => {
+    const handleSubmitMail = (e) => {
         e.preventDefault();
         updateMail(context.accountId,email);
         
     };
 
+    const handleSubmitPhone = (e) => {
+        e.preventDefault();
+        updatePhoneNum(context.accountId,phoneNum);
+        
+    };
+
+    const handleSubmitPass = (e) => {
+        e.preventDefault();
+        if(confPass==password){
+            updatePass(context.accountId,password);
+        }
+        else{
+            alert("Passwords do not match")
+        }
+        
+        
+    };
+
     const updateMail = (id,email) =>{
-        axios.put(`http://localhost:8080/updateEmail/${id}/${email}`,{
+        axios.patch(`http://localhost:8080/updateEmail/${id}/${email}`,{
+            accountId: id,
+            firstName: context.firstName,
+            lastName: context.lastName,
+            email: email,
+            phoneNumber: context.phoneNumber,
+            username: context.username,
+            password: context.password
+        })
+    }
+
+    const updatePhoneNum = (id,phoneNumber) =>{
+        axios.patch(`http://localhost:8080/updatePhone/${id}/${phoneNumber}`,{
+            accountId: id,
+            firstName: context.firstName,
+            lastName: context.lastName,
+            email: email,
+            phoneNumber: context.phoneNumber,
+            username: context.username,
+            password: context.password
+        })
+    }
+
+    const updatePass = (id,password) =>{
+        axios.patch(`http://localhost:8080/updatePass/${id}/${password}`,{
             accountId: id,
             firstName: context.firstName,
             lastName: context.lastName,
@@ -32,24 +74,23 @@ const AccountUpdate = ({updateType}) => {
         
 
     const updateEmail = (
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmitMail}>
             <label>Enter new email: <input type="email" value={email} onChange={(e)=>setEmail(e.target.value)}/></label>
             <input type="submit"/>
         </form>
     )
 
     const updatePhone = (
-        <form>
-            <label>Enter new phone number: <input type="text"/></label>
-            <label>Enter password: <input type="password"/></label>
+        <form onSubmit={handleSubmitPhone}>
+            <label>Enter new phone number: <input type="text" value={phoneNum} onChange={(e)=>setPhoneNum(e.target.value)}/></label>
             <input type="submit"/>
         </form>
     )
 
     const updatePassword = (
-        <form>
-            <label>Enter new password: <input type="password"/></label>
-            <label>Confirm password: <input type="password"/></label>
+        <form onSubmit={handleSubmitPass}>
+            <label>Enter new password: <input type="password" value={password} onChange={(e)=>setPassword(e.target.value)}/></label>
+            <label>Confirm new password: <input type="password" value={confPass} onChange={(e)=>setConfPass(e.target.value)}/></label>
             <input type="submit"/>
         </form>
     )

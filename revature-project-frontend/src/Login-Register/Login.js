@@ -15,9 +15,9 @@ const Login = () => {
         axios.post(`http://localhost:8080/login/${username}/${password}`)
         .then((res)=>{
             setContext(res.data)
+            console.log(context)
+            console.log(context.accountId)
         })
-        console.log(context)
-        console.log(context.accountId)
         
     }
     

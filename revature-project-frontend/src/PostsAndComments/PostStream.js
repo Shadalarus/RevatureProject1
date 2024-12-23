@@ -6,6 +6,7 @@ import UserContext from "../MyContext";
 const PostStream = () => {
 
     const [posts,setPosts]=useState([])
+    const [text,setText]=useState("")
 
     useEffect(()=>{
         axios.get("http://localhost:8080/posts")
@@ -19,7 +20,8 @@ const PostStream = () => {
         return(
             <>
             <h1>Posts</h1>
-            <DisplayPosts posts={posts}/>
+            <input type="text" value={text} placeholder="" onChange={(e)=>setText(e.target.value)}/>
+            <DisplayPosts posts={posts} postFilter={text}/>
             </>
         )
     }
@@ -28,7 +30,7 @@ const PostStream = () => {
             <>
             <h1>Posts</h1>
             <Link to={"/posts/newPost"}>Create New Post</Link>
-            <DisplayPosts posts={posts}/>
+            <DisplayPosts posts={posts} postFilter={text}/>
             </>
         )
     }

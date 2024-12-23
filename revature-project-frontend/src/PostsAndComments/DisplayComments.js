@@ -2,6 +2,7 @@ import { useContext } from "react"
 import UserContext from "../MyContext"
 import GetAuthor from "./GetAuthor"
 import DeleteComment from "./DeleteComment"
+import CommentLikes from "../Likes/CommentLikes"
 
 const DisplayComments = ({comments}) =>{
     const [context, setContext] = useContext(UserContext)
@@ -26,7 +27,7 @@ const DisplayComments = ({comments}) =>{
                     <p>{comment.commentText}</p>
                     <GetAuthor id={comment.accountId}/>
                     <p>Comment Likes: {comment.commentLikes}</p>
-                    <button>Like</button>
+                    <CommentLikes comment={comment}/>
                     <DeleteComment commentId={comment.commentId} madeBy={comment.accountId} user={context.accountId}/>
                 </div>
             ))

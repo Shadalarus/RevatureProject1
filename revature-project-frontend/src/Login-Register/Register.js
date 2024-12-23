@@ -22,13 +22,16 @@ const Register = () => {
     };
     
     const addAccount = (firstName, lastName, email, username, password) => {
-        console.log({
+        axios.post("http://localhost:8080/register", {
             firstName: firstName,
             lastName: lastName,
             email: email,
             phoneNumber: null,
             username: username,
-            password: password
+            accountPassword: password
+        })
+        .then((res)=>{
+            console.log(res.status)
         })
     }
 
