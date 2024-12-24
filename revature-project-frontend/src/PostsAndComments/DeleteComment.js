@@ -8,7 +8,7 @@ const DeleteComment = ({commentId, madeBy, user}) => {
             deleteComment(id);
         }
         else{
-            alert("That is not your post")
+            alert("That is not your comment")
         }
     };
 

@@ -22,9 +22,9 @@ const Account = () => {
         <>
         <DisplayCurrentAccount users={users}/>
         <br/><hr/><br/>
-        <Link to='/updateEmail'>Update Email</Link>
-        <Link to='/updatePhone'>Update Phone Number</Link>
-        <Link to='/passwordChange'>Change Password</Link>
+        <button><Link to='/updateEmail'>Update Email</Link></button>
+        <button><Link to='/updatePhone'>Update Phone Number</Link></button>
+        <button><Link to='/passwordChange'>Change Password</Link></button>
         </>
     )
 }
