@@ -13,8 +13,7 @@ const Register = () => {
     const clickHandler = (e) => {
         e.preventDefault();
         if(password == confPass){
-            addAccount(firstName, lastName, email, username, password);
-            alert("Registration Complete");
+            addAccount(firstName, lastName, email, username, password)
         }
         else{
             alert("Passwords do not match");
@@ -31,7 +30,12 @@ const Register = () => {
             accountPassword: password
         })
         .then((res)=>{
+            alert("Registration Complete");
             console.log(res.status)
+        })
+        .catch(error => {
+            alert("Incorrect input: make sure that your password is longer than four characters.\nIf your password is fine, then the username is already in use.")
+            console.log(error)
         })
     }
 
