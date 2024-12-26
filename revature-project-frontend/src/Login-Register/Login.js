@@ -17,6 +17,10 @@ const Login = () => {
             setContext(res.data)
             console.log(context)
             console.log(context.accountId)
+            alert("Log-in successful")
+        }).catch(error => {
+            alert("Incorrect username or password. Please try again.")
+            console.log(error)
         })
         
     }
