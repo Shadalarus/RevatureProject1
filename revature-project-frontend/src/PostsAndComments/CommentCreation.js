@@ -20,6 +20,9 @@ const CommentCreation = ({postId}) => {
         })
         .then((res)=>{
             console.log(res.data)
+        }).catch(error => {
+            alert("Incorrect input: Comment is too short or too long. You cannot have a post with more than 255 characters.")
+            console.log(error)
         })
     }
 
